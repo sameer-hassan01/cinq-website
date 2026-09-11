@@ -1,0 +1,280 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/* ─── Cinq design tokens ───────────────────────────────────────────────────
+   One committed dark theme. Ink canvas, bone type, a single vermilion accent.
+   The number five is the brand: five founders, five segments in the mark.   */
+:root {
+  --ink: #0c0b0a;
+  --ink-2: #141311;
+  --ink-3: #1d1b18;
+  --ink-4: #2a2723;
+  --line: rgb(243 239 231 / 0.1);
+  --line-strong: rgb(243 239 231 / 0.18);
+  --bone: #f3efe7;
+  --bone-2: #aca69b;
+  --bone-3: #6f6a62;
+  --accent: #ff4d1f;
+  --accent-deep: #c9330c;
+  --accent-glow: rgb(255 77 31 / 0.35);
+  --amber: #ffb020;
+
+  --nav-h: 72px;
+  --pad: clamp(20px, 4.2vw, 64px);
+  --radius: 28px;
+  --radius-sm: 16px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-bone: var(--bone);
+  --color-bone-2: var(--bone-2);
+  --color-bone-3: var(--bone-3);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-amber: var(--amber);
+
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+
+  --spacing-pad: var(--pad);
+  --spacing-nav: var(--nav-h);
+  --radius-card: var(--radius);
+  --radius-card-sm: var(--radius-sm);
+  --ease-out: var(--ease-out);
+  --ease-io: var(--ease-io);
+}
+
+html {
+  background: var(--ink);
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  max-width: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@layer components {
+/* ─── Type ─────────────────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 96, "wdth" 100;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-weight: 700;
+}
+.font-display-tight {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 96, "wdth" 90;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  font-weight: 800;
+}
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.t-hero {
+  font-size: clamp(2.75rem, 6.6vw, 7.5rem);
+}
+.t-h2 {
+  font-size: clamp(2.25rem, 5.2vw, 5.5rem);
+}
+.t-h3 {
+  font-size: clamp(1.5rem, 2.6vw, 2.5rem);
+}
+.t-lead {
+  font-size: clamp(1.0625rem, 1.35vw, 1.375rem);
+  line-height: 1.45;
+}
+.t-body {
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.6;
+}
+.t-small {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ─── Surfaces ─────────────────────────────────────────────────────────── */
+.bezel {
+  background: rgb(243 239 231 / 0.04);
+  box-shadow: inset 0 0 0 1px rgb(243 239 231 / 0.08);
+  border-radius: var(--radius);
+  padding: 6px;
+}
+.bezel > .core {
+  background: var(--ink-2);
+  border-radius: calc(var(--radius) - 6px);
+  box-shadow: inset 0 1px 0 rgb(243 239 231 / 0.06);
+}
+.glass {
+  background: rgb(12 11 10 / 0.55);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    inset 0 0 0 1px rgb(243 239 231 / 0.1),
+    inset 0 1px 0 rgb(243 239 231 / 0.08);
+}
+
+/* ─── Buttons ──────────────────────────────────────────────────────────── */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 9999px;
+  padding: 0.7rem 0.7rem 0.7rem 1.4rem;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  transition:
+    transform 0.6s var(--ease-out),
+    background-color 0.5s var(--ease-out),
+    color 0.5s var(--ease-out),
+    box-shadow 0.5s var(--ease-out);
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn .btn-ico {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  transition:
+    transform 0.6s var(--ease-out),
+    background-color 0.5s var(--ease-out);
+}
+.btn:hover .btn-ico {
+  transform: translate(2px, -2px) scale(1.06);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--ink);
+}
+.btn-primary:hover {
+  background: #ff6238;
+}
+.btn-primary .btn-ico {
+  background: rgb(12 11 10 / 0.12);
+}
+.btn-ghost {
+  color: var(--bone);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+.btn-ghost:hover {
+  box-shadow: inset 0 0 0 1px rgb(243 239 231 / 0.4);
+}
+.btn-ghost .btn-ico {
+  background: rgb(243 239 231 / 0.08);
+}
+.btn-bone {
+  background: var(--bone);
+  color: var(--ink);
+}
+.btn-bone .btn-ico {
+  background: rgb(12 11 10 / 0.1);
+}
+
+/* ─── Utilities ────────────────────────────────────────────────────────── */
+.mask-line {
+  overflow: hidden;
+}
+.mask-line > * {
+  display: block;
+  will-change: transform;
+}
+
+.duotone {
+  filter: grayscale(1) contrast(1.08) brightness(0.92);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: overlay;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
