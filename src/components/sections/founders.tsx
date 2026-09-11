@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, GithubLogo, LinkedinLogo, Globe } from "@phosphor-icons/react/dist/ssr";
@@ -18,6 +18,26 @@ const ease = [0.16, 1, 0.3, 1] as const;
 export function Founders() {
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
+  const list = useRef<HTMLUListElement>(null);
+
+  // On phones there is no hover, so the card sitting in the middle band of
+  // the screen becomes the open one. Cards keep one height there, so opening
+  // never shifts the page under the reader's thumb.
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    if (!mq.matches || !list.current) return;
+    const items = Array.from(list.current.querySelectorAll<HTMLLIElement>("li"));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(items.indexOf(e.target as HTMLLIElement));
+        });
+      },
+      { rootMargin: "-42% 0px -42% 0px", threshold: 0 },
+    );
+    items.forEach((li) => io.observe(li));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section id="founders" className="relative bg-ink px-pad py-24 md:py-36">
@@ -27,6 +47,7 @@ export function Founders() {
         </RevealText>
 
         <motion.ul
+          ref={list}
           className="mt-14 flex flex-col gap-3 md:mt-20 md:h-[640px] md:flex-row"
           initial={reduce ? false : { opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -39,8 +60,8 @@ export function Founders() {
               <li
                 key={f.name}
                 className={cn(
-                  "relative overflow-hidden rounded-card bg-ink-2 transition-[flex-grow,height] duration-[900ms] ease-[var(--ease-out)] md:h-auto",
-                  open ? "h-[480px] md:flex-[3.4]" : "h-[96px] md:flex-1",
+                  "relative h-[440px] overflow-hidden rounded-card bg-ink-2 transition-[flex-grow] duration-[900ms] ease-[var(--ease-out)] md:h-auto",
+                  open ? "md:flex-[3.4]" : "md:flex-1",
                 )}
                 onMouseEnter={() => setActive(i)}
               >
@@ -76,7 +97,7 @@ export function Founders() {
                 {/* Collapsed label */}
                 <div
                   className={cn(
-                    "absolute inset-0 flex items-center justify-between px-6 transition-opacity duration-500 md:items-end md:justify-start md:px-0 md:pb-8",
+                    "absolute inset-0 flex items-end justify-start px-6 pb-6 transition-opacity duration-500 md:px-0 md:pb-8",
                     open ? "opacity-0" : "opacity-100",
                   )}
                 >

@@ -246,9 +246,12 @@ const spiceApps = [
 
 export function SpiceHutVisual() {
   return (
-    <div className="relative flex h-full w-full items-end justify-center overflow-visible">
+    <div className="relative flex h-full w-full flex-col items-center justify-end gap-3 overflow-visible lg:block">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_80%,rgb(255_176_32/0.22),transparent_70%)]" />
-      <Browser title="spicehut.ca" className="absolute bottom-[38%] z-0 aspect-[16/9] w-[78%] max-w-[520px] opacity-90">
+      <Browser
+        title="spicehut.ca"
+        className="relative z-0 aspect-[16/9] w-full max-w-[520px] opacity-90 lg:absolute lg:bottom-[38%] lg:left-1/2 lg:w-[78%] lg:-translate-x-1/2"
+      >
         <div className="grid h-full grid-cols-3 gap-3 p-4">
           {["Menu", "Order online", "Locations"].map((t, i) => (
             <div key={t} className={cn("rounded-lg p-3", i === 1 ? "bg-accent text-ink" : "bg-bone/6")}>
@@ -261,7 +264,7 @@ export function SpiceHutVisual() {
           ))}
         </div>
       </Browser>
-      <div className="relative z-10 flex items-end gap-[-1rem]">
+      <div className="relative z-10 flex origin-bottom scale-[0.8] items-end sm:scale-100 lg:absolute lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2">
         {spiceApps.map((a, i) => (
           <Phone
             key={i}

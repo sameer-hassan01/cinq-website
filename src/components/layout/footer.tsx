@@ -3,7 +3,7 @@
 import { useEffect, useRef, type PointerEvent } from "react";
 import { ArrowUp } from "@phosphor-icons/react/dist/ssr";
 import { brand, contact, footer } from "@/lib/content";
-import { Mark } from "@/components/brand/mark";
+import { AnimatedMark } from "@/components/fx/animated-mark";
 
 const letters = brand.wordmark.split("");
 
@@ -68,7 +68,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-12 border-t border-line pt-14 md:grid-cols-12">
           <div className="md:col-span-5">
-            <Mark className="size-9 text-accent" />
+            <AnimatedMark className="size-9" />
             <p className="t-lead mt-6 max-w-[26ch] text-bone">{brand.tagline}</p>
             <a
               href={`mailto:${contact.email}`}

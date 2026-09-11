@@ -171,7 +171,7 @@ export function Work() {
                   </p>
                 </div>
               </div>
-              <div className="relative min-h-[420px] flex-1 overflow-hidden p-6 md:p-8 lg:min-h-0">
+              <div className="relative min-h-[460px] flex-1 overflow-hidden p-6 md:p-8 sm:min-h-[520px] lg:min-h-0">
                 <div className="work-visual absolute inset-6 md:inset-8">
                   <Visual />
                 </div>
