@@ -59,7 +59,7 @@ const cardCss = `
 .card .place{position:absolute;right:0;bottom:0;font-family:'GM';font-size:5.4pt;letter-spacing:.08em;text-transform:uppercase;color:${C.bone2}}
 .card.back{background:${C.accent};color:${C.ink}}
 .card.back .line{position:absolute;left:5mm;top:5mm;width:38mm;font-family:'BG';font-variation-settings:'opsz' 96,'wdth' 100,'wght' 700;letter-spacing:-.03em;line-height:1.02;font-size:8.2pt}
-.card.back .site{position:absolute;left:5mm;bottom:5mm;font-family:'GM';font-size:5.6pt;letter-spacing:.08em;text-transform:uppercase}
+.card.back .site{position:absolute;left:5mm;bottom:5mm;font-family:'GM';font-size:5.6pt;letter-spacing:.08em;text-transform:uppercase;line-height:1.7}
 .card.back .word{position:absolute;right:5mm;bottom:2.8mm;width:52mm}
 .card.back .word svg{width:100%;height:auto;display:block}
 `;
@@ -69,13 +69,13 @@ const cardFront = (p) => `
   <div class="mark">${svg("mark-accent.svg")}</div>
   <div class="name">${p.name}</div>
   <div class="role">${p.role}</div>
-  <div class="contact">${p.phone ? `<span><b>${p.phone}</b>${p.whatsapp ? " · WhatsApp" : ""}</span>` : ""}<span>${p.email || "vertexdevstudio.tech@gmail.com"}</span><span>cinqstudios.com</span></div>
+  <div class="contact">${p.phone ? `<span><b>${p.phone}</b>${p.whatsapp ? " · WhatsApp" : ""}</span>` : ""}${p.email ? `<span>${p.email}</span>` : ""}<span>cinqstudios.com</span></div>
   <div class="place">Islamabad, Pakistan</div>
 </div></div>`;
 const cardBack = `
 <div class="card back">
   <div class="line">Software your business actually runs on.</div>
-  <div class="site">cinqstudios.com</div>
+  <div class="site">cinqdevstudio@gmail.com<br/>cinqstudios.com</div>
   <div class="word">${svg("wordmark-ink.svg")}</div>
 </div>`;
 
@@ -202,7 +202,7 @@ ${cardCss}
 <div class="cards">
   ${people.map((p) => cardFront(p) + cardBack).join("")}
 </div>
-<p style="margin-top:24px">Three cards carry no phone number because only two real numbers exist, and only one carries a personal address so far; the rest fall back to the shared inbox until each founder supplies theirs. Never invent a number or an address to balance the layout. Do not print until the domain is registered: the cards say cinqstudios.com.</p>
+<p style="margin-top:24px">Three cards carry no phone number because only two real numbers exist, and only one carries a personal address on the front so far; the studio inbox is on every back. Add the others to people.json as they come in. Never invent a number or an address to balance the layout. Do not print until the domain is registered: the cards say cinqstudios.com.</p>
 
 <h2>Files</h2>
 <table>

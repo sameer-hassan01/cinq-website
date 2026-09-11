@@ -45,11 +45,6 @@ opens without a network.
       all read `NEXT_PUBLIC_SITE_URL`, which the workflow sets to the Pages
       URL. When a real domain is bought, add it as the custom domain in the
       Pages settings and set `NEXT_PUBLIC_BASE_PATH` to empty in the workflow.
-- [ ] **Contact email.** `contact.email` in `src/lib/content.ts` is still the
-      working `vertexdevstudio.tech@gmail.com`, because it is real and
-      reachable. Swap it the day a Cinq inbox exists. The cards and the kit
-      carry the same address; change it in `brand/cards/build-cards.js` and
-      `brand/build-kit.js` too, then rebuild.
 - [ ] **Cards.** They say `cinqstudios.com`. Do not print until it is bought.
 
 ## Notes

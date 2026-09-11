@@ -17,9 +17,8 @@ export const seo = {
 } as const;
 
 export const contact = {
-  // Still the working inbox. Swap for a Cinq address the day one exists;
-  // an address that bounces is worse than one with the old name on it.
-  email: "vertexdevstudio.tech@gmail.com",
+  // The studio inbox.
+  email: "cinqdevstudio@gmail.com",
   location: "Islamabad, Pakistan",
   response: "A senior person replies within 24 business hours.",
   copyright: "© 2026 Cinq",

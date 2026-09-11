@@ -20,11 +20,11 @@ const puppeteer = require("puppeteer-core");
 const CHROME =
   process.env.CHROME_PATH || "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
-// Shared on every card. Change the email the day a Cinq inbox exists, and the
-// domain the day it is registered. Printing a domain you do not own is how you
+// Shared on every card: the studio inbox goes on the back, a founder's own
+// address on the front. Change the domain the day it is registered. Printing a domain you do not own is how you
 // end up reprinting 500 cards.
 const CONTACT = {
-  email: "vertexdevstudio.tech@gmail.com",
+  email: "cinqdevstudio@gmail.com",
   site: "cinqstudios.com",
   place: "Islamabad, Pakistan",
   line: "Software your business actually runs on.",
@@ -81,7 +81,7 @@ body{font-family:'G',system-ui,sans-serif;color:${BONE};-webkit-print-color-adju
 .back .word{position:absolute;right:${INSET}mm;bottom:${INSET - 2.2}mm;width:52mm}
 .back .word svg{width:100%;height:auto;display:block}
 .back .line{position:absolute;left:${INSET}mm;top:${INSET}mm;width:38mm;font-size:8.2pt;color:${INK};font-family:'BG';font-variation-settings:'opsz' 96,'wdth' 100,'wght' 700;letter-spacing:-0.03em;line-height:1.02}
-.back .site{position:absolute;left:${INSET}mm;bottom:${INSET}mm;font-family:'GM';font-size:5.6pt;letter-spacing:0.08em;text-transform:uppercase;color:${INK}}
+.back .site{position:absolute;left:${INSET}mm;bottom:${INSET}mm;font-family:'GM';font-size:5.6pt;letter-spacing:0.08em;text-transform:uppercase;color:${INK};line-height:1.7}
 `;
 
 function front(p) {
@@ -96,7 +96,7 @@ function front(p) {
       <div class="role">${p.role}</div>
       <div class="contact">
         ${phone}
-        <span>${p.email || CONTACT.email}</span>
+        ${p.email ? `<span>${p.email}</span>` : ""}
         <span>${CONTACT.site}</span>
       </div>
       <div class="place mono">${CONTACT.place}</div>
@@ -108,7 +108,7 @@ function back() {
   return `
   <section class="page back">
     <div class="line">${CONTACT.line}</div>
-    <div class="site">${CONTACT.site}</div>
+    <div class="site">${CONTACT.email}<br/>${CONTACT.site}</div>
     <div class="word">${svg("wordmark-ink.svg")}</div>
   </section>`;
 }
