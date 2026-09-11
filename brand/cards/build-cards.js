@@ -78,10 +78,10 @@ body{font-family:'G',system-ui,sans-serif;color:${BONE};-webkit-print-color-adju
 .contact b{color:${BONE};font-weight:500}
 .place{position:absolute;right:0;bottom:0;text-align:right}
 .back{background:${ACCENT}}
-.back .word{position:absolute;right:${INSET}mm;bottom:${INSET - 2.2}mm;width:52mm}
+.back .word{position:absolute;right:${INSET}mm;bottom:${INSET - 1.8}mm;width:40mm}
 .back .word svg{width:100%;height:auto;display:block}
 .back .line{position:absolute;left:${INSET}mm;top:${INSET}mm;width:38mm;font-size:8.2pt;color:${INK};font-family:'BG';font-variation-settings:'opsz' 96,'wdth' 100,'wght' 700;letter-spacing:-0.03em;line-height:1.02}
-.back .site{position:absolute;left:${INSET}mm;bottom:${INSET}mm;font-family:'GM';font-size:5.6pt;letter-spacing:0.08em;text-transform:uppercase;color:${INK};line-height:1.7}
+.back .site{position:absolute;left:${INSET}mm;bottom:${INSET}mm;font-family:'GM';font-size:5.8pt;letter-spacing:0.02em;color:${INK};line-height:1.7}
 `;
 
 function front(p) {

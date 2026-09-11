@@ -59,8 +59,8 @@ const cardCss = `
 .card .place{position:absolute;right:0;bottom:0;font-family:'GM';font-size:5.4pt;letter-spacing:.08em;text-transform:uppercase;color:${C.bone2}}
 .card.back{background:${C.accent};color:${C.ink}}
 .card.back .line{position:absolute;left:5mm;top:5mm;width:38mm;font-family:'BG';font-variation-settings:'opsz' 96,'wdth' 100,'wght' 700;letter-spacing:-.03em;line-height:1.02;font-size:8.2pt}
-.card.back .site{position:absolute;left:5mm;bottom:5mm;font-family:'GM';font-size:5.6pt;letter-spacing:.08em;text-transform:uppercase;line-height:1.7}
-.card.back .word{position:absolute;right:5mm;bottom:2.8mm;width:52mm}
+.card.back .site{position:absolute;left:5mm;bottom:5mm;font-family:'GM';font-size:5.8pt;letter-spacing:.02em;line-height:1.7}
+.card.back .word{position:absolute;right:5mm;bottom:3.2mm;width:40mm}
 .card.back .word svg{width:100%;height:auto;display:block}
 `;
 
