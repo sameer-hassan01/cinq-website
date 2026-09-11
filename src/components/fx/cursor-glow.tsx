@@ -42,7 +42,7 @@ export function CursorGlow() {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[5] size-[52vmax] rounded-full mix-blend-screen"
+      className="pointer-events-none fixed top-0 left-0 z-[5] size-[52vmax] rounded-full mix-blend-screen light:mix-blend-multiply light:opacity-60"
       style={{
         x: sx,
         y: sy,
@@ -50,7 +50,7 @@ export function CursorGlow() {
         translateX: "-50%",
         translateY: "-50%",
         background:
-          "radial-gradient(closest-side, rgb(255 77 31 / 0.16), rgb(255 77 31 / 0.05) 45%, transparent 70%)",
+          "radial-gradient(closest-side, color-mix(in srgb, var(--accent) 16%, transparent), color-mix(in srgb, var(--accent) 5%, transparent) 45%, transparent 70%)",
       }}
     />
   );

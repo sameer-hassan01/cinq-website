@@ -69,7 +69,7 @@ export function Founders() {
                       open ? "opacity-55" : "opacity-85",
                     )}
                   />
-                  <div className="absolute inset-0 bg-[linear-gradient(to_top,rgb(12_11_10/0.95)_0%,rgb(12_11_10/0.35)_45%,transparent_80%)]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(to_top,color-mix(in_srgb,var(--ink)_95%,transparent)_0%,color-mix(in_srgb,var(--ink)_35%,transparent)_45%,transparent_80%)]" />
                 </div>
 
                 {/* Collapsed label */}
@@ -94,7 +94,7 @@ export function Founders() {
                     open ? "z-30 translate-y-0 opacity-100 delay-200" : "pointer-events-none translate-y-4 opacity-0",
                   )}
                 >
-                  <p className="t-mono text-accent">{f.role}</p>
+                  <p className="t-mono text-accent-text">{f.role}</p>
                   <h3 className="font-display text-[clamp(1.75rem,3vw,2.75rem)] text-bone">{f.name}</h3>
                   <p className="t-body max-w-[44ch] text-pretty text-bone-2">{f.bio}</p>
                   <div className="relative mt-1 flex items-center gap-2">
@@ -121,7 +121,7 @@ export function Founders() {
         </motion.ul>
 
         <p className="mt-8 flex items-center gap-2 t-small text-bone-3">
-          <ArrowUpRight size={14} className="text-accent" />
+          <ArrowUpRight size={14} className="text-accent-text" />
           Every project is led by one of the five. No account managers in between.
         </p>
       </div>

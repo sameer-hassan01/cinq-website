@@ -8,6 +8,7 @@ import { Preloader } from "@/components/fx/preloader";
 import { Grain } from "@/components/fx/grain";
 import { CursorGlow } from "@/components/fx/cursor-glow";
 import { Header } from "@/components/layout/header";
+import { themeInitScript } from "@/lib/theme";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -47,8 +48,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fontClassNames} h-full overflow-x-clip antialiased`}>
+    <html lang="en" className={`${fontClassNames} h-full overflow-x-clip antialiased`} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}

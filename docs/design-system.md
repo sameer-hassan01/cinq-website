@@ -11,7 +11,10 @@ variance 9, motion 9, density 3.
 
 ## 1. Colour
 
-One palette. There is no light mode; the brand is ink, bone and one accent.
+One palette, dark by default. Light mode is an opt-in toggle in the header:
+`html.light` swaps the same roles (ink becomes paper, bone becomes near-black)
+so every component inverts without a second set of classes. The accent
+deepens where it is read as text.
 
 | Token | Value | Role |
 |---|---|---|
@@ -22,12 +25,21 @@ One palette. There is no light mode; the brand is ink, bone and one accent.
 | `--bone` | `#f3efe7` | Type, the wordmark. Never pure white. |
 | `--bone-2` | `#aca69b` | Secondary text. 6.4:1 on ink. |
 | `--bone-3` | `#6f6a62` | Mono labels and quiet metadata. 3.4:1: large or uppercase mono only. |
-| `--accent` | `#ff4d1f` | The one accent. 5.9:1 on ink. Buttons, the mark, CTAs, highlights. |
+| `--accent` | `#f9633a` (light: `#ef5a2f`) | The one accent for fills and the mark. 6.5:1 on ink; ink text on it 5.8:1. |
+| `--accent-text` | `#f9633a` (light: `#b8360f`) | The accent as small text. Use `text-accent-text` for labels and links, `text-accent` only for the mark and display numerals. |
+| `--on-accent` | `#0c0b0a` | Text on an accent fill, in both modes. |
+| `--ink-warm` | `#1a1410` (light: `#efe3d3`) | The warm panel in the work showcase. |
 | `--amber` | `#ffb020` | Inside the hero shader and the OG gradient only. Never UI. |
 | `--line` | bone at 10% | Hairlines. |
 
 Ink text on accent (`#0c0b0a` on `#ff4d1f`) is 5.9:1; ink on bone is 17:1.
 Bone on accent fails and is never used.
+
+**Hard-coded colours are banned in components.** Every alpha tint goes
+through `color-mix(in srgb, var(--bone) 10%, transparent)` or a Tailwind
+opacity utility on a token, so light mode inverts it for free. The hero
+shader takes a `uLight` uniform and draws the same ribbons as vermilion ink
+on paper.
 
 **Colour blocks.** The page is one theme. Two deliberate exceptions, each
 used once: the vermilion panel in the work showcase (Cinq RMS) and the bone

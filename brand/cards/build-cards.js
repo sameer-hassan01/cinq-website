@@ -44,7 +44,7 @@ const INSET = BLEED + SAFE;
 const INK = "#0c0b0a";
 const BONE = "#f3efe7";
 const BONE_2 = "#aca69b";
-const ACCENT = "#ff4d1f";
+const ACCENT = "#f9633a";
 
 const here = (...p) => path.resolve(__dirname, ...p);
 const svg = (f) => fs.readFileSync(here("../../public/brand", f), "utf8");

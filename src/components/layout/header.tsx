@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Wordmark } from "@/components/brand/wordmark";
 import { ProgressMark } from "@/components/brand/progress-mark";
 import { RollText } from "@/components/ui/roll-text";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { ButtonLink } from "@/components/ui/button";
 import { useIntro } from "@/components/providers/intro";
 import { Menu } from "./menu";
@@ -97,6 +98,7 @@ export function Header() {
             >
               {nav.cta.label}
             </ButtonLink>
+            <ThemeToggle />
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}

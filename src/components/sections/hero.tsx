@@ -109,7 +109,7 @@ export function Hero() {
       <HeroCanvas active intro={ready} />
       {/* Scrim for legibility where the copy sits. */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_0%_100%,rgb(12_11_10/0.85)_0%,rgb(12_11_10/0.35)_45%,transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_0%_100%,color-mix(in_srgb,var(--ink)_85%,transparent)_0%,color-mix(in_srgb,var(--ink)_35%,transparent)_45%,transparent_70%)]"
         aria-hidden
       />
 

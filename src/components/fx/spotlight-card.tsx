@@ -33,9 +33,10 @@ export function SpotlightCard({
   const rx = useSpring(useTransform(py, [0, 1], [tilt, -tilt]), { stiffness: 140, damping: 18 });
   const ry = useSpring(useTransform(px, [0, 1], [-tilt, tilt]), { stiffness: 140, damping: 18 });
   const glow = useSpring(hover, { stiffness: 120, damping: 20 });
+  const glowPct = useTransform(glow, (v) => Math.round(v * 100));
 
-  const border = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, rgb(255 77 31 / ${glow}), transparent 65%)`;
-  const sheen = useMotionTemplate`radial-gradient(420px circle at ${mx}px ${my}px, rgb(243 239 231 / 0.06), transparent 60%)`;
+  const border = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, color-mix(in srgb, var(--accent) ${glowPct}%, transparent), transparent 65%)`;
+  const sheen = useMotionTemplate`radial-gradient(420px circle at ${mx}px ${my}px, color-mix(in srgb, var(--bone) 6%, transparent), transparent 60%)`;
 
   function onMove(e: PointerEvent<HTMLDivElement>) {
     if (e.pointerType !== "mouse") return;

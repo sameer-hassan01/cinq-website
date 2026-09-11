@@ -21,9 +21,9 @@ const visuals = {
 
 const tones: Record<WorkProject["tone"], string> = {
   ink: "bg-ink-2 text-bone",
-  accent: "bg-accent text-ink",
+  accent: "bg-accent text-on-accent",
   deep: "bg-ink-3 text-bone",
-  bone: "bg-[#1a1410] text-bone",
+  bone: "bg-ink-warm text-bone",
 };
 
 /**
@@ -130,7 +130,7 @@ export function Work() {
       >
         {/* Title card */}
         <div className="flex shrink-0 flex-col justify-between rounded-card bg-ink-2 p-7 md:p-10 lg:w-[38vw] lg:min-w-[420px]">
-          <p className="t-mono text-accent">Work</p>
+          <p className="t-mono text-accent-text">Work</p>
           <div>
             <h2 className="font-display t-h2 text-balance text-bone">
               Four things we built. Three are ours.
@@ -156,17 +156,17 @@ export function Work() {
             >
               <div className="flex flex-col justify-between p-7 md:p-10 lg:w-[42%] lg:shrink-0">
                 <div>
-                  <p className={cn("work-reveal t-mono", onAccent ? "text-ink/70" : "text-accent")}>{p.kind}</p>
+                  <p className={cn("work-reveal t-mono", onAccent ? "text-on-accent/70" : "text-accent-text")}>{p.kind}</p>
                   <h3 className="work-reveal font-display-tight mt-4 text-[clamp(2.5rem,4.5vw,4.5rem)]">
                     {p.name}
                   </h3>
                 </div>
                 <div className="mt-10">
                   <p className="work-reveal font-display t-h3 text-balance">{p.title}</p>
-                  <p className={cn("work-reveal t-body mt-5 max-w-[42ch] text-pretty", onAccent ? "text-ink/80" : "text-bone-2")}>
+                  <p className={cn("work-reveal t-body mt-5 max-w-[42ch] text-pretty", onAccent ? "text-on-accent/80" : "text-bone-2")}>
                     {p.summary}
                   </p>
-                  <p className={cn("work-reveal mt-6 border-t pt-4 t-small font-medium", onAccent ? "border-ink/20" : "border-line")}>
+                  <p className={cn("work-reveal mt-6 border-t pt-4 t-small font-medium", onAccent ? "border-on-accent/20" : "border-line")}>
                     {p.outcome}
                   </p>
                 </div>

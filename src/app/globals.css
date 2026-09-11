@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "lenis/dist/lenis.css";
 
+@custom-variant light (&:where(.light, .light *));
+
 /* ─── Cinq design tokens ───────────────────────────────────────────────────
    One committed dark theme. Ink canvas, bone type, a single vermilion accent.
    The number five is the brand: five founders, five segments in the mark.   */
@@ -9,15 +11,17 @@
   --ink-2: #141311;
   --ink-3: #1d1b18;
   --ink-4: #2a2723;
-  --line: rgb(243 239 231 / 0.1);
-  --line-strong: rgb(243 239 231 / 0.18);
+  --line: color-mix(in srgb, var(--bone) 10%, transparent);
+  --line-strong: color-mix(in srgb, var(--bone) 18%, transparent);
   --bone: #f3efe7;
   --bone-2: #aca69b;
   --bone-3: #6f6a62;
-  --accent: #ff4d1f;
+  --accent: #f9633a;
+  --accent-text: #f9633a;
+  --on-accent: #0c0b0a;
   --accent-deep: #c9330c;
-  --accent-glow: rgb(255 77 31 / 0.35);
   --amber: #ffb020;
+  --ink-warm: #1a1410;
 
   --nav-h: 72px;
   --pad: clamp(20px, 4.2vw, 64px);
@@ -27,6 +31,24 @@
   --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
 
   color-scheme: dark;
+}
+
+/* Light mode, opt-in. The same roles, inverted: ink becomes paper, bone
+   becomes near-black. The accent deepens where it is read as text. */
+html.light {
+  --ink: #f4f1ea;
+  --ink-2: #ebe7de;
+  --ink-3: #e2ddd1;
+  --ink-4: #cdc6b8;
+  --line: rgb(20 18 15 / 0.1);
+  --line-strong: rgb(20 18 15 / 0.2);
+  --bone: #14120f;
+  --bone-2: #5a554d;
+  --bone-3: #857f74;
+  --accent: #ef5a2f;
+  --accent-text: #b8360f;
+  --ink-warm: #efe3d3;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -40,6 +62,9 @@
   --color-bone-2: var(--bone-2);
   --color-bone-3: var(--bone-3);
   --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-on-accent: var(--on-accent);
+  --color-ink-warm: var(--ink-warm);
   --color-accent-deep: var(--accent-deep);
   --color-amber: var(--amber);
 
@@ -85,7 +110,7 @@ canvas {
 
 ::selection {
   background: var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
 }
 
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
@@ -147,23 +172,23 @@ canvas {
 
 /* ─── Surfaces ─────────────────────────────────────────────────────────── */
 .bezel {
-  background: rgb(243 239 231 / 0.04);
-  box-shadow: inset 0 0 0 1px rgb(243 239 231 / 0.08);
+  background: color-mix(in srgb, var(--bone) 4%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bone) 8%, transparent);
   border-radius: var(--radius);
   padding: 6px;
 }
 .bezel > .core {
   background: var(--ink-2);
   border-radius: calc(var(--radius) - 6px);
-  box-shadow: inset 0 1px 0 rgb(243 239 231 / 0.06);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--bone) 6%, transparent);
 }
 .glass {
-  background: rgb(12 11 10 / 0.55);
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   box-shadow:
-    inset 0 0 0 1px rgb(243 239 231 / 0.1),
-    inset 0 1px 0 rgb(243 239 231 / 0.08);
+    inset 0 0 0 1px color-mix(in srgb, var(--bone) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--bone) 8%, transparent);
 }
 
 /* ─── Buttons ──────────────────────────────────────────────────────────── */
@@ -203,10 +228,10 @@ canvas {
 }
 .btn-primary {
   background: var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
 }
 .btn-primary:hover {
-  background: #ff6238;
+  background: color-mix(in srgb, var(--accent) 88%, white);
 }
 .btn-primary .btn-ico {
   background: rgb(12 11 10 / 0.12);
@@ -216,17 +241,17 @@ canvas {
   box-shadow: inset 0 0 0 1px var(--line-strong);
 }
 .btn-ghost:hover {
-  box-shadow: inset 0 0 0 1px rgb(243 239 231 / 0.4);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bone) 40%, transparent);
 }
 .btn-ghost .btn-ico {
-  background: rgb(243 239 231 / 0.08);
+  background: color-mix(in srgb, var(--bone) 8%, transparent);
 }
 .btn-bone {
   background: var(--bone);
   color: var(--ink);
 }
 .btn-bone .btn-ico {
-  background: rgb(12 11 10 / 0.1);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
 }
 
 /* ─── Utilities ────────────────────────────────────────────────────────── */
@@ -251,6 +276,28 @@ canvas {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 220px 220px;
   mix-blend-mode: overlay;
+}
+
+/* The mark as a loading indicator: segments light up in turn, ring turns. */
+.mark-loader {
+  animation: mark-spin 2.4s linear infinite;
+  transform-origin: 50% 50%;
+}
+.mark-loader path {
+  opacity: 0.25;
+  animation: mark-chase 1.2s ease-in-out infinite;
+}
+.mark-loader path:nth-child(1) { animation-delay: 0s; }
+.mark-loader path:nth-child(2) { animation-delay: -0.96s; }
+.mark-loader path:nth-child(3) { animation-delay: -0.72s; }
+.mark-loader path:nth-child(4) { animation-delay: -0.48s; }
+.mark-loader path:nth-child(5) { animation-delay: -0.24s; }
+@keyframes mark-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes mark-chase {
+  0%, 100% { opacity: 0.25; }
+  25% { opacity: 1; }
 }
 
 .marquee-track {

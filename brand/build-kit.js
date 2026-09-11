@@ -24,8 +24,11 @@ const C = {
   bone: "#f3efe7",
   bone2: "#aca69b",
   bone3: "#6f6a62",
-  accent: "#ff4d1f",
+  accent: "#f9633a",
+  accentLight: "#ef5a2f",
+  accentText: "#b8360f",
   accentDeep: "#c9330c",
+  paper: "#f4f1ea",
   amber: "#ffb020",
 };
 
@@ -35,7 +38,10 @@ const swatches = [
   ["Ink 3", C.ink3, "A second step up, used sparingly."],
   ["Bone", C.bone, "Type and the wordmark. Never pure white."],
   ["Bone 2", C.bone2, "Secondary text. 6.4:1 on Ink."],
-  ["Vermilion", C.accent, "The one accent. Buttons, the mark, highlights. 5.9:1 on Ink."],
+  ["Vermilion", C.accent, "The one accent. Buttons, the mark, highlights. 6.5:1 on Ink."],
+  ["Paper", C.paper, "Light mode canvas. Ink and Bone swap roles on it."],
+  ["Vermilion on paper", C.accentLight, "Fills in light mode. Ink text on it is 5.8:1."],
+  ["Vermilion, as text", C.accentText, "Small type on paper. 5.1:1."],
   ["Vermilion deep", C.accentDeep, "Gradients and print shadows only."],
   ["Amber", C.amber, "Only inside the hero light and the OG image. Never as UI."],
 ];
@@ -134,6 +140,13 @@ ${cardCss}
   ${[16, 24, 32, 48, 96, 160].map((s) => `<div><span style="width:${s}px;height:${s}px;display:block">${svg("mark-accent.svg")}</span><span class="mono">${s}px</span></div>`).join("")}
 </div>
 
+<h3>As a loading indicator</h3>
+<p>The five segments light up in turn while the ring turns. Use it wherever something is buffering: the site has it as a React component (<b>src/components/brand/loader.tsx</b>) and the kit ships it as animated SVG files (<b>loader-accent / -bone / -ink .svg</b>) that move anywhere an SVG can be shown.</p>
+<div class="tile sizes" style="margin-top:16px">
+  ${[20, 32, 48, 96].map((s) => `<div><span style="width:${s}px;height:${s}px;display:block">${svg("loader-accent.svg").replace("<svg ", '<svg style="width:100%;height:100%;display:block" ')}</span><span class="mono">${s}px</span></div>`).join("")}
+  <div><span style="width:96px;height:96px;display:block;background:${C.paper};border-radius:16px;padding:12px">${svg("loader-ink.svg").replace("<svg ", '<svg style="width:100%;height:100%;display:block" ')}</span><span class="mono">On paper</span></div>
+</div>
+
 <h2>The wordmark</h2>
 <p><b>cinq</b>, lowercase, in Bricolage Grotesque at weight 800, width 90, optical size 96, tracked -4.5%. Lowercase on purpose: the descender of the q is the only thing that drops below the line and it gives the word its shape. The files are outlined, so nobody needs the font installed.</p>
 <div class="grid" style="margin-top:24px">
@@ -161,7 +174,7 @@ ${cardCss}
 </ul>
 
 <h2>Colour</h2>
-<p>One committed dark palette. There is no light mode: the brand is ink, bone and one vermilion. Print flood colours from the hex and ask for a proof; a vermilion this saturated converts badly to CMYK, so match a swatch rather than a number.</p>
+<p>Dark is the brand and the default. Light mode exists as an opt-in on the site: the same roles inverted, ink becoming paper and bone becoming near-black, with the vermilion deepened wherever it is read as text. Print flood colours from the hex and ask for a proof; a vermilion this saturated converts badly to CMYK, so match a swatch rather than a number.</p>
 <div class="grid" style="margin-top:24px">
   ${swatches.map(([n, hex, note]) => `<div class="sw"><div class="chip" style="background:${hex}"></div><code>${hex}</code><b>${n}</b><small>${note}</small></div>`).join("")}
 </div>
@@ -199,6 +212,7 @@ ${cardCss}
 <tr><th>lockup*.svg, lockup-*-2000.png</th><td>Mark beside wordmark. "mono" variants are one colour.</td></tr>
 <tr><th>lockup-stacked*.svg, -1200.png</th><td>Mark above wordmark, for square spaces.</td></tr>
 <tr><th>icon.svg, icon-512/1024.png, avatar-1024.png</th><td>App icon and social avatars: the mark on an ink tile.</td></tr>
+<tr><th>loader-accent / -bone / -ink .svg</th><td>The animated loading indicator.</td></tr>
 <tr><th>src/lib/mark.ts, brand/logo/build-logo.ts</th><td>The geometry and the generator. Change the mark there and re-run; every file above is rebuilt.</td></tr>
 </table>
 </body></html>`;

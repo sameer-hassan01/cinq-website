@@ -28,7 +28,7 @@ export function QeematVisual() {
 
   return (
     <div className="relative flex h-full w-full items-end justify-center">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_70%,rgb(255_77_31/0.32),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_70%,color-mix(in_srgb,var(--accent)_32%,transparent),transparent_70%)]" />
       <Phone className="relative z-10 translate-y-[8%] -rotate-[4deg] md:w-[14rem] lg:w-[15.5rem]">
         <Image
           src="/products/qeemat/dashboard.jpg"
@@ -142,7 +142,7 @@ export function RmsVisual() {
                         "shrink-0 rounded-full px-2 py-0.5 text-[0.65rem] font-medium transition-colors duration-500",
                         s === "new" && "bg-bone/10 text-bone",
                         s === "kitchen" && "bg-amber/20 text-amber",
-                        s === "ready" && "bg-accent/20 text-accent",
+                        s === "ready" && "bg-accent/20 text-accent-text",
                         s === "served" && "bg-bone/6 text-bone-3",
                       )}
                     >

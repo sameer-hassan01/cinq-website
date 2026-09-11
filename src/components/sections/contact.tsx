@@ -135,12 +135,12 @@ export function Contact() {
                 rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                className="w-full resize-none rounded-2xl bg-bone/5 px-4 py-3 text-bone shadow-[inset_0_0_0_1px_rgb(243_239_231/0.1)] transition-shadow focus:shadow-[inset_0_0_0_1px_var(--accent)] focus:outline-none"
+                className="w-full resize-none rounded-2xl bg-bone/5 px-4 py-3 text-bone shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--bone)_10%,transparent)] transition-shadow focus:shadow-[inset_0_0_0_1px_var(--accent)] focus:outline-none"
               />
             </div>
 
             {error ? (
-              <p role="alert" className="t-small -mt-3 text-accent">
+              <p role="alert" className="t-small -mt-3 text-accent-text">
                 {error}
               </p>
             ) : null}
@@ -182,7 +182,7 @@ function Pill({
         "cursor-pointer rounded-full px-4 py-2 text-[0.9rem] font-medium transition-[background-color,color,box-shadow] duration-300",
         checked
           ? "bg-accent text-ink"
-          : "bg-bone/5 text-bone-2 shadow-[inset_0_0_0_1px_rgb(243_239_231/0.1)] hover:text-bone",
+          : "bg-bone/5 text-bone-2 shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--bone)_10%,transparent)] hover:text-bone",
       )}
     >
       <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
@@ -215,7 +215,7 @@ function Field({
         value={value}
         autoComplete={autoComplete}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-full bg-bone/5 px-4 py-3 text-bone shadow-[inset_0_0_0_1px_rgb(243_239_231/0.1)] transition-shadow focus:shadow-[inset_0_0_0_1px_var(--accent)] focus:outline-none"
+        className="w-full rounded-full bg-bone/5 px-4 py-3 text-bone shadow-[inset_0_0_0_1px_color-mix(in_srgb,var(--bone)_10%,transparent)] transition-shadow focus:shadow-[inset_0_0_0_1px_var(--accent)] focus:outline-none"
       />
     </div>
   );

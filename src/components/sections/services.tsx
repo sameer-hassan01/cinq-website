@@ -98,7 +98,7 @@ export function Services() {
                         <ul className="flex flex-col gap-2 md:col-span-5">
                           {s.points.map((p) => (
                             <li key={p} className="flex items-center gap-2 t-small text-bone">
-                              <Check size={14} weight="bold" className="text-accent" />
+                              <Check size={14} weight="bold" className="text-accent-text" />
                               {p}
                             </li>
                           ))}

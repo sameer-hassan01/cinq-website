@@ -27,6 +27,7 @@ const fragment = /* glsl */ `
   uniform float uIntro;
   uniform float uScroll;
   uniform vec3 uClick; // x, y in uv space, z = time of the click
+  uniform float uLight; // 0 dark, 1 light
 
   float hash(vec2 p) {
     p = fract(p * vec2(123.34, 456.21));
@@ -62,7 +63,7 @@ const fragment = /* glsl */ `
     float t = uTime * 0.12;
 
     vec3 ink = vec3(0.047, 0.043, 0.039);
-    vec3 verm = vec3(1.0, 0.30, 0.12);
+    vec3 verm = vec3(0.976, 0.388, 0.227);
     vec3 amber = vec3(1.0, 0.69, 0.13);
     vec3 rose = vec3(0.96, 0.22, 0.34);
 
@@ -106,6 +107,14 @@ const fragment = /* glsl */ `
     vec3 col = ink + acc;
     float v = 1.0 - smoothstep(0.35, 1.15, length(vec2(p.x / aspect, p.y) * 1.7));
     col = mix(ink, col, 0.4 + 0.6 * v);
+    // Light mode: the same ribbons drawn as vermilion ink on paper.
+    vec3 paper = vec3(0.957, 0.945, 0.918);
+    float peak = max(acc.r, max(acc.g, acc.b));
+    float a = clamp(peak * 1.15, 0.0, 1.0);
+    vec3 hue = acc / max(peak, 0.001);
+    vec3 lightCol = mix(paper, hue * vec3(0.93, 0.5, 0.3), a);
+    lightCol = mix(paper, lightCol, 0.4 + 0.6 * v);
+    col = mix(col, lightCol, uLight);
     // Dither so the dark gradients never band.
     col += (hash(gl_FragCoord.xy + uTime) - 0.5) * (1.5 / 255.0);
     gl_FragColor = vec4(col, 1.0);
@@ -131,6 +140,7 @@ function Ribbons({ shared }: { shared: RefObject<Shared> }) {
       uIntro: { value: 0 },
       uScroll: { value: 0 },
       uClick: { value: new THREE.Vector3(0.5, 0.5, -100) },
+      uLight: { value: 0 },
     }),
     [],
   );
@@ -151,6 +161,8 @@ function Ribbons({ shared }: { shared: RefObject<Shared> }) {
       lastClick.current = s.click.t;
       u.uClick.value.set(s.click.x, s.click.y, state.clock.elapsedTime);
     }
+    const light = document.documentElement.classList.contains("light") ? 1 : 0;
+    u.uLight.value += (light - u.uLight.value) * 0.08;
     const sc = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
     u.uScroll.value = sc;
   });

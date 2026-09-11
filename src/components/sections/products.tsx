@@ -46,7 +46,7 @@ export function Products() {
             <SpotlightCard className="h-full">
               <article className="bezel h-full">
                 <div className="core relative flex h-full min-h-[560px] flex-col overflow-hidden md:min-h-[680px]">
-                  <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_80%_100%,rgb(255_77_31/0.35),transparent_70%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(70%_50%_at_80%_100%,color-mix(in_srgb,var(--accent)_35%,transparent),transparent_70%)]" />
                   <div className="relative z-10 flex flex-col gap-4 p-7 md:p-9">
                     <Header name={qeemat.name} status={qeemat.status} />
                     <p className="t-lead max-w-[30ch] text-bone">{qeemat.get}</p>
@@ -85,7 +85,7 @@ export function Products() {
             <SpotlightCard className="h-full">
               <article className="bezel h-full">
                 <div className="core relative flex h-full flex-col gap-4 overflow-hidden p-7 md:p-9">
-                  <div className="absolute inset-0 bg-[linear-gradient(135deg,rgb(255_77_31/0.22),transparent_55%)]" />
+                  <div className="absolute inset-0 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--accent)_22%,transparent),transparent_55%)]" />
                   <Mark className="absolute -right-10 -bottom-12 size-56 text-accent/15 transition-transform duration-1000 ease-[var(--ease-out)] group-hover:rotate-[-20deg]" />
                   <div className="relative z-10 flex flex-col gap-4">
                     <Header name={rms.name} />
@@ -104,10 +104,10 @@ export function Products() {
               <article className="bezel h-full">
                 <div className="core relative flex h-full flex-col gap-4 overflow-hidden p-7 md:p-9">
                   <div
-                    className="absolute inset-0 opacity-40 [background-image:radial-gradient(rgb(243_239_231/0.18)_1px,transparent_1px)] [background-size:18px_18px]"
+                    className="absolute inset-0 opacity-40 [background-image:radial-gradient(color-mix(in_srgb,var(--bone)_18%,transparent)_1px,transparent_1px)] [background-size:18px_18px]"
                     aria-hidden
                   />
-                  <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_100%_0%,rgb(20_19_17/0)_0%,var(--ink-2)_70%)]" />
+                  <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_100%_0%,transparent_0%,var(--ink-2)_70%)]" />
                   <div className="relative z-10 flex flex-col gap-4">
                     <Header name={dentisto.name} />
                     <p className="t-lead max-w-[26ch] text-bone">{dentisto.get}</p>
@@ -142,12 +142,12 @@ function CtaLink({ href, children }: { href: string; children: React.ReactNode }
     <a
       href={href}
       className={cn(
-        "group/cta mt-2 inline-flex w-fit items-center gap-2 text-[0.95rem] font-medium text-accent",
+        "group/cta mt-2 inline-flex w-fit items-center gap-2 text-[0.95rem] font-medium text-accent-text",
       )}
     >
       <span className="relative">
         {children}
-        <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[var(--ease-out)] group-hover/cta:scale-x-100" />
+        <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent-text transition-transform duration-500 ease-[var(--ease-out)] group-hover/cta:scale-x-100" />
       </span>
       <ArrowUpRight size={16} weight="bold" className="transition-transform duration-500 ease-[var(--ease-out)] group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
     </a>

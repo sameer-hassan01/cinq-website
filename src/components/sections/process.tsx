@@ -9,7 +9,7 @@ import { RevealText } from "@/components/fx/reveal-text";
 
 const tones = [
   "bg-ink-2 text-bone",
-  "bg-accent text-ink",
+  "bg-accent text-on-accent",
   "bg-ink-3 text-bone",
   "bg-bone text-ink",
 ];
@@ -75,24 +75,24 @@ export function Process() {
                 <span className="font-display-tight text-[clamp(4rem,10vw,9rem)] leading-none opacity-90">
                   {i + 1}
                 </span>
-                <Mark className={cn("size-8 md:size-10", i === 1 ? "text-ink" : i === 3 ? "text-ink" : "text-accent")} />
+                <Mark className={cn("size-8 md:size-10", i === 1 ? "text-on-accent" : i === 3 ? "text-ink" : "text-accent")} />
               </div>
               <div className="grid gap-8 md:grid-cols-12 md:items-end">
                 <div className="md:col-span-7">
                   <h3 className="font-display text-[clamp(2rem,4.5vw,4.25rem)]">{s.title}</h3>
-                  <p className={cn("t-lead mt-5 max-w-[40ch] text-pretty", i === 1 || i === 3 ? "text-ink/80" : "text-bone-2")}>
+                  <p className={cn("t-lead mt-5 max-w-[40ch] text-pretty", i === 1 ? "text-on-accent/80" : i === 3 ? "text-ink/80" : "text-bone-2")}>
                     {s.body}
                   </p>
                 </div>
                 <div className="md:col-span-5">
-                  <p className={cn("t-mono mb-3", i === 1 || i === 3 ? "text-ink/60" : "text-bone-3")}>You get</p>
+                  <p className={cn("t-mono mb-3", i === 1 ? "text-on-accent/60" : i === 3 ? "text-ink/60" : "text-bone-3")}>You get</p>
                   <ul className="flex flex-col gap-2">
                     {s.gets.map((g) => (
                       <li
                         key={g}
                         className={cn(
                           "rounded-full px-4 py-2.5 t-small font-medium",
-                          i === 1 || i === 3 ? "bg-ink/10" : "bg-bone/8",
+                          i === 1 ? "bg-on-accent/10" : i === 3 ? "bg-ink/10" : "bg-bone/8",
                         )}
                       >
                         {g}

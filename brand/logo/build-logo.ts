@@ -32,7 +32,7 @@ fs.mkdirSync(OUT, { recursive: true });
 const COLORS = {
   ink: "#0c0b0a",
   bone: "#f3efe7",
-  accent: "#ff4d1f",
+  accent: "#f9633a",
 } as const;
 
 // ── wordmark outlines ──────────────────────────────────────────────────────
@@ -169,6 +169,19 @@ function iconSvg(rounded: boolean) {
   );
 }
 
+/** The mark as a loading indicator, animated with SMIL so it moves anywhere
+    an SVG can be shown: segments light up in turn while the ring turns. */
+function loaderSvg(color: string) {
+  const step = 0.24;
+  const paths = segs
+    .map(
+      (d, i) =>
+        `<path d="${d}" opacity="0.25"><animate attributeName="opacity" values="0.25;1;0.25" keyTimes="0;0.25;1" dur="1.2s" begin="${f(-1.2 + i * step)}s" repeatCount="indefinite"/></path>`,
+    )
+    .join("");
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${MARK.size} ${MARK.size}" width="${MARK.size}" height="${MARK.size}"><g fill="none" stroke="${color}" stroke-width="${MARK.stroke}"><animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="2.4s" repeatCount="indefinite"/>${paths}</g></svg>\n`;
+}
+
 // ── write files ────────────────────────────────────────────────────────────
 const files: Record<string, string> = {
   "mark.svg": markSvg("currentColor"),
@@ -187,6 +200,9 @@ const files: Record<string, string> = {
   "lockup-stacked-bone.svg": stackedSvg(COLORS.bone, COLORS.accent),
   "lockup-stacked-ink.svg": stackedSvg(COLORS.ink, COLORS.accent),
   "icon.svg": iconSvg(true),
+  "loader-accent.svg": loaderSvg(COLORS.accent),
+  "loader-bone.svg": loaderSvg(COLORS.bone),
+  "loader-ink.svg": loaderSvg(COLORS.ink),
 };
 for (const [name, body] of Object.entries(files)) {
   fs.writeFileSync(path.join(OUT, name), body);

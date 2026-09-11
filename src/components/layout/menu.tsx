@@ -57,13 +57,13 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
                   <motion.a
                     href={l.href}
                     onClick={onClose}
-                    className="group flex items-baseline gap-4 py-1 font-display-tight text-[clamp(2.6rem,9vw,6.5rem)] text-bone transition-colors duration-500 hover:text-accent"
+                    className="group flex items-baseline gap-4 py-1 font-display-tight text-[clamp(2.6rem,9vw,6.5rem)] text-bone transition-colors duration-500 hover:text-accent-text"
                     initial={{ y: "110%" }}
                     animate={{ y: 0 }}
                     exit={{ y: "110%" }}
                     transition={{ duration: 0.9, ease, delay: 0.12 + i * 0.06 }}
                   >
-                    <span className="t-mono w-6 shrink-0 text-bone-3 transition-colors group-hover:text-accent">
+                    <span className="t-mono w-6 shrink-0 text-bone-3 transition-colors group-hover:text-accent-text">
                       0{i + 1}
                     </span>
                     <RollText delayStep={25}>{l.label}</RollText>
@@ -86,7 +86,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
                 className="group inline-flex items-center gap-2 text-bone underline-offset-4 hover:underline"
               >
                 {contact.email}
-                <ArrowUpRight size={16} className="text-accent transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight size={16} className="text-accent-text transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <div className="flex flex-wrap gap-x-5 gap-y-1 md:justify-end">
                 {contact.phones.map((p) => (

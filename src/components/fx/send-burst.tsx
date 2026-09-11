@@ -52,7 +52,7 @@ export const SendBurst = forwardRef<SendBurstHandle>(function SendBurst(_, ref) 
           className="absolute top-1/2 left-1/2 size-9 -translate-x-1/2 -translate-y-1/2 opacity-0"
           fill="none"
         >
-          <path d={d} stroke="#ff4d1f" strokeWidth={MARK.stroke} />
+          <path d={d} stroke="var(--accent)" strokeWidth={MARK.stroke} />
         </svg>
       ))}
     </span>

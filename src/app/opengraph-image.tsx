@@ -42,7 +42,7 @@ export default async function OpenGraphImage() {
             height: 700,
             borderRadius: 9999,
             background:
-              "radial-gradient(closest-side, rgba(255,77,31,0.55), rgba(255,176,32,0.25) 55%, rgba(12,11,10,0) 100%)",
+              "radial-gradient(closest-side, rgba(249,99,58,0.55), rgba(255,176,32,0.25) 55%, rgba(12,11,10,0) 100%)",
             transform: "rotate(-18deg)",
           }}
         />
@@ -79,7 +79,7 @@ export default async function OpenGraphImage() {
             fill="none"
           >
             {segments.map((d, i) => (
-              <path key={i} d={d} stroke="#ff4d1f" strokeWidth={MARK.stroke} />
+              <path key={i} d={d} stroke="#f9633a" strokeWidth={MARK.stroke} />
             ))}
           </svg>
 
