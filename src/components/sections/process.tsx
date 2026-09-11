@@ -5,6 +5,7 @@ import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { process } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Mark } from "@/components/brand/mark";
+import { RevealText } from "@/components/fx/reveal-text";
 
 const tones = [
   "bg-ink-2 text-bone",
@@ -55,9 +56,9 @@ export function Process() {
   return (
     <section ref={root} id="process" className="relative bg-ink px-pad pt-24 pb-10 md:pt-36">
       <div className="mx-auto max-w-[1280px]">
-        <h2 className="font-display t-h2 max-w-[18ch] text-balance text-bone">
+        <RevealText className="font-display t-h2 max-w-[18ch] text-balance text-bone">
           {process.heading}
-        </h2>
+        </RevealText>
 
         <div className="mt-14 md:mt-20">
           {process.steps.map((s, i) => (

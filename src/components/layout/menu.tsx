@@ -6,6 +6,7 @@ import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { contact, nav } from "@/lib/content";
 import { getLenis } from "@/components/providers/smooth-scroll";
 import { Mark } from "@/components/brand/mark";
+import { RollText } from "@/components/ui/roll-text";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -65,7 +66,7 @@ export function Menu({ open, onClose }: { open: boolean; onClose: () => void }) 
                     <span className="t-mono w-6 shrink-0 text-bone-3 transition-colors group-hover:text-accent">
                       0{i + 1}
                     </span>
-                    {l.label}
+                    <RollText delayStep={25}>{l.label}</RollText>
                   </motion.a>
                 </li>
               ))}

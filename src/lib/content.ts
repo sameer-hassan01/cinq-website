@@ -284,6 +284,16 @@ export const founders = {
       linkedin: "https://www.linkedin.com/in/hamzasultan-dev/",
     },
     {
+      name: "Sameer Hassan",
+      first: "Sameer",
+      role: "Co-founder and CPO",
+      bio: "Shapes what we build and why, turning what a business needs into a product people can actually use.",
+      image: "/team/sameer.jpg",
+      github: "https://github.com/sameer-hassan01",
+      linkedin: "https://www.linkedin.com/in/sameer-hassan-isb/",
+      site: "https://sameer-hassan01.github.io/",
+    },
+    {
       name: "Shahzaib Farooq",
       first: "Shahzaib",
       role: "Co-founder and COO",
@@ -299,16 +309,6 @@ export const founders = {
       bio: "Leads engineering and the technical decisions behind what we build, from the first sketch to what runs in production.",
       image: "/team/hamood.jpg",
       linkedin: "https://www.linkedin.com/in/hamood-bin-hafeez-00b78a326/",
-    },
-    {
-      name: "Sameer Hassan",
-      first: "Sameer",
-      role: "Co-founder and CPO",
-      bio: "Shapes what we build and why, turning what a business needs into a product people can actually use.",
-      image: "/team/sameer.jpg",
-      github: "https://github.com/sameer-hassan01",
-      linkedin: "https://www.linkedin.com/in/sameer-hassan-isb/",
-      site: "https://sameer-hassan01.github.io/",
     },
     {
       name: "Umair Aamir",

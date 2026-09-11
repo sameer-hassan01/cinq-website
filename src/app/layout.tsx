@@ -6,6 +6,7 @@ import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { IntroProvider } from "@/components/providers/intro";
 import { Preloader } from "@/components/fx/preloader";
 import { Grain } from "@/components/fx/grain";
+import { CursorGlow } from "@/components/fx/cursor-glow";
 import { Header } from "@/components/layout/header";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Preloader />
             <Header />
             {children}
+            <CursorGlow />
             <Grain />
           </SmoothScroll>
         </IntroProvider>

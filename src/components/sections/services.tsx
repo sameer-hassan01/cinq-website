@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Check } from "@phosphor-icons/react/dist/ssr";
 import { services } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { RevealText } from "@/components/fx/reveal-text";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -19,17 +20,20 @@ export function Services() {
   return (
     <section id="services" className="relative bg-ink px-pad py-24 md:py-36">
       <div className="mx-auto max-w-[1280px]">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease }}
-        >
-          <h2 className="font-display t-h2 max-w-[16ch] text-balance text-bone">
+        <div>
+          <RevealText className="font-display t-h2 max-w-[16ch] text-balance text-bone">
             {services.heading}
-          </h2>
-          <p className="t-lead mt-6 max-w-[48ch] text-pretty text-bone-2">{services.sub}</p>
-        </motion.div>
+          </RevealText>
+          <motion.p
+            className="t-lead mt-6 max-w-[48ch] text-pretty text-bone-2"
+            initial={reduce ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 1, ease, delay: 0.3 }}
+          >
+            {services.sub}
+          </motion.p>
+        </div>
 
         <ul
           className="mt-14 border-t border-line md:mt-20"

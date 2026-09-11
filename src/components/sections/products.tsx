@@ -7,6 +7,7 @@ import { products } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { SpotlightCard } from "@/components/fx/spotlight-card";
 import { Mark } from "@/components/brand/mark";
+import { RevealText } from "@/components/fx/reveal-text";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -35,11 +36,9 @@ export function Products() {
   return (
     <section id="products" className="relative bg-ink px-pad py-24 md:py-36">
       <div className="mx-auto max-w-[1280px]">
-        <Reveal>
-          <h2 className="font-display t-h2 max-w-[22ch] text-balance text-bone">
-            {products.heading}
-          </h2>
-        </Reveal>
+        <RevealText className="font-display t-h2 max-w-[22ch] text-balance text-bone">
+          {products.heading}
+        </RevealText>
 
         <div className="mt-14 grid gap-4 md:mt-20 md:grid-cols-12 md:grid-rows-2">
           {/* Qeemat */}

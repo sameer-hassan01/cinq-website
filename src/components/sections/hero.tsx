@@ -86,6 +86,19 @@ export function Hero() {
     { scope: root, dependencies: [ready] },
   );
 
+  // The five segments chase each other round the ring once, then settle.
+  function spin() {
+    if (!root.current) return;
+    gsap.to(root.current.querySelectorAll(".hero-mark path"), {
+      rotation: "+=360",
+      svgOrigin: "50 50",
+      duration: 1.4,
+      stagger: 0.07,
+      ease: "expo.inOut",
+      overwrite: "auto",
+    });
+  }
+
   return (
     <section
       ref={root}
@@ -102,7 +115,12 @@ export function Hero() {
 
       <div className="hero-copy relative z-10 mt-auto grid w-full gap-10 px-pad pt-[calc(var(--nav-h)+4rem)] pb-[clamp(2rem,6vh,4.5rem)] lg:grid-cols-12 lg:items-end lg:gap-6">
         <div className="lg:col-span-8">
-          <div className="hero-mark hero-fade mb-6 text-accent">
+          <div
+            className="hero-mark hero-fade mb-6 w-fit cursor-pointer text-accent"
+            onMouseEnter={spin}
+            onClick={spin}
+            title="Five segments, five founders"
+          >
             <Mark className="size-10 md:size-12" />
           </div>
           <h1 className="hero-h1 font-display t-hero max-w-[17ch] text-balance text-bone">

@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
 import { contact, contactSection as c } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Magnetic } from "@/components/fx/magnetic";
+import { RevealText } from "@/components/fx/reveal-text";
+import { SendBurst, type SendBurstHandle } from "@/components/fx/send-burst";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -23,12 +25,14 @@ export function Contact() {
   const [reach, setReach] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const burst = useRef<SendBurstHandle>(null);
 
   function submit(e: FormEvent) {
     e.preventDefault();
     if (!need) return setError(c.errors.need);
     if (!name.trim() || !reach.trim()) return setError(c.errors.reach);
     setError(null);
+    burst.current?.fire();
     const chosen = c.needs.find((n) => n.id === need)!;
     const body = [
       `Name: ${name.trim()}`,
@@ -37,7 +41,10 @@ export function Contact() {
       `When: ${timing}`,
       message.trim() ? `\n${message.trim()}` : "",
     ].join("\n");
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(chosen.subject)}&body=${encodeURIComponent(body)}`;
+    // Let the burst play before the mail app takes focus.
+    setTimeout(() => {
+      window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(chosen.subject)}&body=${encodeURIComponent(body)}`;
+    }, 650);
   }
 
   return (
@@ -50,7 +57,7 @@ export function Contact() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease }}
         >
-          <h2 className="font-display t-h2 max-w-[12ch] text-balance text-bone">{c.heading}</h2>
+          <RevealText className="font-display t-h2 max-w-[12ch] text-balance text-bone">{c.heading}</RevealText>
           <p className="t-lead mt-6 max-w-[34ch] text-bone-2">{c.lead}</p>
 
           <div className="mt-10">
@@ -140,9 +147,12 @@ export function Contact() {
 
             <div className="flex flex-wrap items-center gap-5">
               <Magnetic>
-                <Button type="submit" variant="primary">
-                  {c.send}
-                </Button>
+                <span className="relative inline-block">
+                  <SendBurst ref={burst} />
+                  <Button type="submit" variant="primary">
+                    {c.send}
+                  </Button>
+                </span>
               </Magnetic>
               <p className="t-small text-bone-3">{c.sendNote}</p>
             </div>

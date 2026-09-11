@@ -4,7 +4,9 @@ import { useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { nav } from "@/lib/content";
 import { cn } from "@/lib/utils";
-import { Lockup } from "@/components/brand/wordmark";
+import { Wordmark } from "@/components/brand/wordmark";
+import { ProgressMark } from "@/components/brand/progress-mark";
+import { RollText } from "@/components/ui/roll-text";
 import { ButtonLink } from "@/components/ui/button";
 import { useIntro } from "@/components/providers/intro";
 import { Menu } from "./menu";
@@ -69,8 +71,9 @@ export function Header() {
             open && "bg-ink/80",
           )}
         >
-          <a href="#top" className="flex items-center text-bone" aria-label="Cinq, back to top">
-            <Lockup markClassName="text-accent" />
+          <a href="#top" className="flex items-center gap-2 text-bone" aria-label="Cinq, back to top">
+            <ProgressMark className="size-6 text-accent" />
+            <Wordmark className="text-[1.45rem] translate-y-[-0.06em]" />
           </a>
 
           <ul className="hidden items-center gap-1 md:flex">
@@ -80,10 +83,7 @@ export function Header() {
                   href={l.href}
                   className="group relative block px-3.5 py-2 text-[0.9rem] font-medium text-bone-2 transition-colors duration-300 hover:text-bone"
                 >
-                  <span className="relative">
-                    {l.label}
-                    <span className="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-0 bg-accent transition-transform duration-500 ease-[var(--ease-out)] group-hover:scale-x-100" />
-                  </span>
+                  <RollText>{l.label}</RollText>
                 </a>
               </li>
             ))}

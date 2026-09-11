@@ -26,6 +26,7 @@ const fragment = /* glsl */ `
   uniform vec2 uMouse;
   uniform float uIntro;
   uniform float uScroll;
+  uniform vec3 uClick; // x, y in uv space, z = time of the click
 
   float hash(vec2 p) {
     p = fract(p * vec2(123.34, 456.21));
@@ -77,6 +78,12 @@ const fragment = /* glsl */ `
         + (w - 0.5) * 0.36 * (0.6 + 0.4 * sin(fi));
       float dm = length(p - m);
       y += 0.11 * exp(-dm * dm * 6.0) * sin(fi * 1.3 + t * 3.0 + dm * 8.0);
+      // A click sends a ring out through the ribbons that fades over 2s.
+      float age = uTime - uClick.z;
+      vec2 cp = vec2((uClick.x - 0.5) * aspect, uClick.y - 0.5);
+      float dc = length(p - cp);
+      float ring = exp(-age * 1.4) * sin(dc * 26.0 - age * 9.0) * exp(-dc * dc * 2.2) * step(0.0, age);
+      y += 0.09 * ring * (0.6 + 0.4 * sin(fi * 2.0));
 
       float d = abs(p.y - y);
       float width = 0.009 + 0.015 * (0.5 + 0.5 * sin(p.x * 2.2 + t * 1.5 + fi * 2.0));
@@ -108,11 +115,13 @@ const fragment = /* glsl */ `
 type Shared = {
   mouse: { x: number; y: number };
   intro: { v: number };
+  click: { x: number; y: number; t: number };
 };
 
 function Ribbons({ shared }: { shared: RefObject<Shared> }) {
   const mat = useRef<THREE.ShaderMaterial>(null);
   const smooth = useRef({ x: 0.5, y: 0.5 });
+  const lastClick = useRef(-1);
 
   const uniforms = useMemo(
     () => ({
@@ -121,6 +130,7 @@ function Ribbons({ shared }: { shared: RefObject<Shared> }) {
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uIntro: { value: 0 },
       uScroll: { value: 0 },
+      uClick: { value: new THREE.Vector3(0.5, 0.5, -100) },
     }),
     [],
   );
@@ -136,6 +146,11 @@ function Ribbons({ shared }: { shared: RefObject<Shared> }) {
     smooth.current.y += (s.mouse.y - smooth.current.y) * 0.06;
     u.uMouse.value.set(smooth.current.x, smooth.current.y);
     u.uIntro.value += (s.intro.v - u.uIntro.value) * 0.03;
+    // A new click carries a new stamp; the uniform takes the shader clock.
+    if (s.click.t !== lastClick.current) {
+      lastClick.current = s.click.t;
+      u.uClick.value.set(s.click.x, s.click.y, state.clock.elapsedTime);
+    }
     const sc = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
     u.uScroll.value = sc;
   });
@@ -158,7 +173,11 @@ function Ribbons({ shared }: { shared: RefObject<Shared> }) {
 export function HeroCanvas({ active, intro }: { active: boolean; intro: boolean }) {
   // A mutable box shared with the render loop. The ref object itself is
   // passed down; its value is only read inside effects and useFrame.
-  const shared = useRef<Shared>({ mouse: { x: 0.5, y: 0.5 }, intro: { v: 0 } });
+  const shared = useRef<Shared>({
+    mouse: { x: 0.5, y: 0.5 },
+    intro: { v: 0 },
+    click: { x: 0.5, y: 0.5, t: -1 },
+  });
   const [inView, setInView] = useState(true);
   const host = useRef<HTMLDivElement>(null);
 
@@ -171,8 +190,18 @@ export function HeroCanvas({ active, intro }: { active: boolean; intro: boolean 
       shared.current.mouse.x = e.clientX / window.innerWidth;
       shared.current.mouse.y = 1 - e.clientY / window.innerHeight;
     }
+    function onDown(e: PointerEvent) {
+      if (window.scrollY > window.innerHeight) return;
+      shared.current.click.x = e.clientX / window.innerWidth;
+      shared.current.click.y = 1 - e.clientY / window.innerHeight;
+      shared.current.click.t = performance.now();
+    }
     window.addEventListener("pointermove", onMove, { passive: true });
-    return () => window.removeEventListener("pointermove", onMove);
+    window.addEventListener("pointerdown", onDown, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerdown", onDown);
+    };
   }, []);
 
   useEffect(() => {

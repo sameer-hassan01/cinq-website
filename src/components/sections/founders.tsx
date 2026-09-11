@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, GithubLogo, LinkedinLogo, Globe } from "@phosphor-icons/react/dist/ssr";
 import { founders } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { RevealText } from "@/components/fx/reveal-text";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -20,15 +21,9 @@ export function Founders() {
   return (
     <section id="founders" className="relative bg-ink px-pad py-24 md:py-36">
       <div className="mx-auto max-w-[1280px]">
-        <motion.h2
-          className="font-display t-h2 max-w-[18ch] text-balance text-bone"
-          initial={reduce ? false : { opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, ease }}
-        >
+        <RevealText className="font-display t-h2 max-w-[18ch] text-balance text-bone">
           {founders.heading}
-        </motion.h2>
+        </RevealText>
 
         <motion.ul
           className="mt-14 flex flex-col gap-3 md:mt-20 md:h-[640px] md:flex-row"
@@ -93,13 +88,16 @@ export function Founders() {
                 <div
                   className={cn(
                     "absolute inset-x-0 bottom-0 flex flex-col gap-3 p-6 transition-[opacity,transform] duration-700 ease-[var(--ease-out)] md:p-8",
-                    open ? "translate-y-0 opacity-100 delay-200" : "translate-y-4 opacity-0",
+                    // z-30 here, not only on the links: the transform below
+                    // makes this box its own stacking context, so the links'
+                    // z-index alone never climbs above the card's hit area.
+                    open ? "z-30 translate-y-0 opacity-100 delay-200" : "pointer-events-none translate-y-4 opacity-0",
                   )}
                 >
                   <p className="t-mono text-accent">{f.role}</p>
                   <h3 className="font-display text-[clamp(1.75rem,3vw,2.75rem)] text-bone">{f.name}</h3>
                   <p className="t-body max-w-[44ch] text-pretty text-bone-2">{f.bio}</p>
-                  <div className="relative z-30 mt-1 flex items-center gap-2">
+                  <div className="relative mt-1 flex items-center gap-2">
                     {f.linkedin ? (
                       <Social href={f.linkedin} label={`${f.first} on LinkedIn`}>
                         <LinkedinLogo size={18} />
