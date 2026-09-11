@@ -41,9 +41,9 @@ opacity utility on a token, so light mode inverts it for free. The hero
 shader takes a `uLight` uniform and draws the same ribbons as vermilion ink
 on paper.
 
-**Colour blocks.** The page is one theme. Two deliberate exceptions, each
-used once: the vermilion panel in the work showcase (Cinq RMS) and the bone
-card at the end of the process stack. Do not add a third.
+**Colour blocks.** The page is one theme. The only inversions are the
+vermilion panels: Cinq RMS in the work showcase and steps 2 and 4 of the
+process stack, which alternate dark, orange, dark, orange.
 
 ## 2. Type
 
