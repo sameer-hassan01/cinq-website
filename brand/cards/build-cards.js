@@ -96,7 +96,7 @@ function front(p) {
       <div class="role">${p.role}</div>
       <div class="contact">
         ${phone}
-        <span>${CONTACT.email}</span>
+        <span>${p.email || CONTACT.email}</span>
         <span>${CONTACT.site}</span>
       </div>
       <div class="place mono">${CONTACT.place}</div>

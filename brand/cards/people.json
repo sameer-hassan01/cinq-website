@@ -1,35 +1,40 @@
 {
-  "_comment": "Edit this file, then run `node build-cards.js` to regenerate every PDF. Leave `phone` empty and the line is simply left off the card — never invent a number to fill the space. `email` and `site` are shared and live in build-cards.js.",
+  "_comment": "Edit this file, then run `node brand/cards/build-cards.js` to regenerate every PDF. Leave `phone` empty and the line is simply left off the card; leave `email` empty and the card falls back to the shared inbox. Never invent a number or an address to fill the space.",
   "people": [
     {
       "name": "Hamza Sultan",
       "role": "Founder and CEO",
       "phone": "+92 320 2929511",
-      "whatsapp": true
-    },
-    {
-      "name": "Shahzaib Farooq",
-      "role": "Co-founder and COO",
-      "phone": "+92 340 5889424",
-      "whatsapp": true
-    },
-    {
-      "name": "Hamood Bin Hafeez",
-      "role": "Co-founder and CTO",
-      "phone": "",
-      "whatsapp": false
+      "whatsapp": true,
+      "email": ""
     },
     {
       "name": "Sameer Hassan",
       "role": "Co-founder and CPO",
       "phone": "",
-      "whatsapp": false
+      "whatsapp": false,
+      "email": "sameerhassanq3@gmail.com"
+    },
+    {
+      "name": "Shahzaib Farooq",
+      "role": "Co-founder and COO",
+      "phone": "+92 340 5889424",
+      "whatsapp": true,
+      "email": ""
+    },
+    {
+      "name": "Hamood Bin Hafeez",
+      "role": "Co-founder and CTO",
+      "phone": "",
+      "whatsapp": false,
+      "email": ""
     },
     {
       "name": "Umair Aamir",
       "role": "Co-founder and Security Lead",
       "phone": "",
-      "whatsapp": false
+      "whatsapp": false,
+      "email": ""
     }
   ]
 }

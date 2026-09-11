@@ -69,7 +69,7 @@ const cardFront = (p) => `
   <div class="mark">${svg("mark-accent.svg")}</div>
   <div class="name">${p.name}</div>
   <div class="role">${p.role}</div>
-  <div class="contact">${p.phone ? `<span><b>${p.phone}</b>${p.whatsapp ? " · WhatsApp" : ""}</span>` : ""}<span>vertexdevstudio.tech@gmail.com</span><span>cinqstudios.com</span></div>
+  <div class="contact">${p.phone ? `<span><b>${p.phone}</b>${p.whatsapp ? " · WhatsApp" : ""}</span>` : ""}<span>${p.email || "vertexdevstudio.tech@gmail.com"}</span><span>cinqstudios.com</span></div>
   <div class="place">Islamabad, Pakistan</div>
 </div></div>`;
 const cardBack = `
@@ -202,7 +202,7 @@ ${cardCss}
 <div class="cards">
   ${people.map((p) => cardFront(p) + cardBack).join("")}
 </div>
-<p style="margin-top:24px">Three cards carry no phone number because only two real numbers exist. Never invent one to balance the layout. Do not print until the domain is registered: the cards say cinqstudios.com.</p>
+<p style="margin-top:24px">Three cards carry no phone number because only two real numbers exist, and only one carries a personal address so far; the rest fall back to the shared inbox until each founder supplies theirs. Never invent a number or an address to balance the layout. Do not print until the domain is registered: the cards say cinqstudios.com.</p>
 
 <h2>Files</h2>
 <table>
