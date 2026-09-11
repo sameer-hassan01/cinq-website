@@ -6,7 +6,8 @@ import { motion, useMotionValue, useSpring } from "motion/react";
 /**
  * A soft pool of vermilion light that follows the pointer across the whole
  * page, so every section feels lit from where you are. Fixed, non-interactive,
- * and absent on touch devices where there is no pointer to follow.
+ * absent on touch devices, and off in light mode: a glow multiplied onto paper
+ * reads as a stain, not as light.
  */
 export function CursorGlow() {
   const x = useMotionValue(-1000);
@@ -42,7 +43,7 @@ export function CursorGlow() {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[5] size-[52vmax] rounded-full mix-blend-screen light:mix-blend-multiply light:opacity-60"
+      className="pointer-events-none fixed top-0 left-0 z-[5] size-[52vmax] rounded-full mix-blend-screen light:hidden"
       style={{
         x: sx,
         y: sy,
