@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { SpotlightCard } from "@/components/fx/spotlight-card";
 import { Mark } from "@/components/brand/mark";
 import { RevealText } from "@/components/fx/reveal-text";
+import { withBase } from "@/lib/base-path";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -56,7 +57,7 @@ export function Products() {
                   <div className="relative mt-auto h-[360px] md:h-[380px]">
                     <div className="absolute right-[8%] bottom-[-16%] w-[200px] rotate-[-8deg] overflow-hidden rounded-[1.6rem] shadow-[0_40px_60px_-20px_rgb(0_0_0/0.7)] transition-transform duration-700 ease-[var(--ease-out)] group-hover:translate-y-[-10px] group-hover:rotate-[-5deg] md:w-[240px]">
                       <Image
-                        src="/products/qeemat/add.jpg"
+                        src={withBase("/products/qeemat/add.jpg")}
                         alt="Adding a transaction in Qeemat."
                         width={576}
                         height={1160}
@@ -66,7 +67,7 @@ export function Products() {
                     </div>
                     <div className="absolute right-[36%] bottom-[-30%] w-[200px] rotate-[6deg] overflow-hidden rounded-[1.6rem] shadow-[0_40px_60px_-20px_rgb(0_0_0/0.7)] transition-transform duration-700 ease-[var(--ease-out)] group-hover:translate-y-[-18px] group-hover:rotate-[3deg] md:w-[240px]">
                       <Image
-                        src="/products/qeemat/dashboard.jpg"
+                        src={withBase("/products/qeemat/dashboard.jpg")}
                         alt="The Qeemat home screen."
                         width={576}
                         height={1160}

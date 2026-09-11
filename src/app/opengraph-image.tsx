@@ -4,6 +4,7 @@ import path from "node:path";
 import { brand, seo } from "@/lib/content";
 import { MARK, markSegments } from "@/lib/mark";
 
+export const dynamic = "force-static";
 export const alt = seo.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

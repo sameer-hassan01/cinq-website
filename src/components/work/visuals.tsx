@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Browser, Phone } from "./devices";
+import { withBase } from "@/lib/base-path";
 
 /* ─── Qeemat: the real product ───────────────────────────────────────────── */
 
@@ -31,7 +32,7 @@ export function QeematVisual() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_70%,color-mix(in_srgb,var(--accent)_32%,transparent),transparent_70%)]" />
       <Phone className="relative z-10 translate-y-[8%] -rotate-[4deg] md:w-[14rem] lg:w-[15.5rem]">
         <Image
-          src="/products/qeemat/dashboard.jpg"
+          src={withBase("/products/qeemat/dashboard.jpg")}
           alt="The Qeemat home screen: balance across all accounts, income and spend, and shortcuts to scan a receipt or add an entry."
           width={576}
           height={1160}
@@ -48,11 +49,11 @@ export function QeematVisual() {
           loop
           playsInline
           preload="metadata"
-          poster="/products/qeemat/capture-poster.jpg"
+          poster={withBase("/products/qeemat/capture-poster.jpg")}
           aria-label="Qeemat detecting a bank alert and offering to add the transaction."
         >
-          <source src="/products/qeemat/capture.webm" type="video/webm" />
-          <source src="/products/qeemat/capture.mp4" type="video/mp4" />
+          <source src={withBase("/products/qeemat/capture.webm")} type="video/webm" />
+          <source src={withBase("/products/qeemat/capture.mp4")} type="video/mp4" />
         </video>
       </Phone>
     </div>

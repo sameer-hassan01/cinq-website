@@ -1,5 +1,9 @@
 # Cinq. The company site.
 
+Deployed to GitHub Pages from this repo by `.github/workflows/pages.yml` on
+every push to `main`. It is a fully static export; hand-written asset URLs go
+through `withBase()` so they work under the `/cinq-website/` path.
+
 One page. Next.js 16 (App Router, Turbopack), Tailwind v4, GSAP for
 scrolltelling, Motion for component interaction, React Three Fiber for the
 hero, Lenis for the scroll.
@@ -38,8 +42,9 @@ opens without a network.
 ## Before this goes live
 
 - [ ] **Domain.** `metadataBase`, `robots.txt`, the sitemap and the JSON-LD
-      all read `NEXT_PUBLIC_SITE_URL`. Set it at deploy time and they all turn
-      on; leave it and they stay quiet rather than pointing at localhost.
+      all read `NEXT_PUBLIC_SITE_URL`, which the workflow sets to the Pages
+      URL. When a real domain is bought, add it as the custom domain in the
+      Pages settings and set `NEXT_PUBLIC_BASE_PATH` to empty in the workflow.
 - [ ] **Contact email.** `contact.email` in `src/lib/content.ts` is still the
       working `vertexdevstudio.tech@gmail.com`, because it is real and
       reachable. Swap it the day a Cinq inbox exists. The cards and the kit

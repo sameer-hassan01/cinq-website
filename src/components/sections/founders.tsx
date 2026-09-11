@@ -7,6 +7,7 @@ import { ArrowUpRight, GithubLogo, LinkedinLogo, Globe } from "@phosphor-icons/r
 import { founders } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { RevealText } from "@/components/fx/reveal-text";
+import { withBase } from "@/lib/base-path";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -53,7 +54,7 @@ export function Founders() {
                 />
                 <div className="absolute inset-0">
                   <Image
-                    src={f.image}
+                    src={withBase(f.image)}
                     alt={`${f.name}, ${f.role} at Cinq.`}
                     fill
                     sizes="(min-width: 768px) 40vw, 100vw"
