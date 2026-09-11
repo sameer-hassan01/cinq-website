@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type PointerEvent } from "react";
+import { useEffect, useRef, type PointerEvent } from "react";
 import { ArrowUp } from "@phosphor-icons/react/dist/ssr";
 import { brand, contact, footer } from "@/lib/content";
 import { Mark } from "@/components/brand/mark";
@@ -14,28 +14,53 @@ const letters = brand.wordmark.split("");
  */
 export function Footer() {
   const word = useRef<HTMLDivElement>(null);
+  const target = useRef<number[]>(letters.map(() => 800));
+  const current = useRef<number[]>(letters.map(() => 800));
   const raf = useRef(0);
+
+  // Weight is eased in JS, one frame at a time, and only the weight axis
+  // moves. A CSS transition on font-variation-settings plus a width change
+  // left slivers of the old glyph behind in Chrome.
+  function step() {
+    const spans = word.current?.querySelectorAll<HTMLSpanElement>("[data-letter]");
+    if (!spans) return;
+    let moving = false;
+    spans.forEach((s, i) => {
+      const c = current.current[i];
+      const t = target.current[i];
+      const n = Math.abs(t - c) < 0.5 ? t : c + (t - c) * 0.16;
+      if (n !== c) {
+        current.current[i] = n;
+        s.style.fontVariationSettings = `"opsz" 96, "wdth" 90, "wght" ${Math.round(n)}`;
+        moving = true;
+      }
+    });
+    if (moving) raf.current = requestAnimationFrame(step);
+  }
+
+  function schedule() {
+    cancelAnimationFrame(raf.current);
+    raf.current = requestAnimationFrame(step);
+  }
+
+  useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
   function onMove(e: PointerEvent<HTMLDivElement>) {
     if (e.pointerType !== "mouse") return;
+    const spans = word.current?.querySelectorAll<HTMLSpanElement>("[data-letter]");
+    if (!spans) return;
     const x = e.clientX;
-    cancelAnimationFrame(raf.current);
-    raf.current = requestAnimationFrame(() => {
-      const spans = word.current?.querySelectorAll<HTMLSpanElement>("[data-letter]");
-      spans?.forEach((s) => {
-        const r = s.getBoundingClientRect();
-        const d = Math.abs(x - (r.left + r.width / 2));
-        const t = Math.max(0, 1 - d / 420);
-        const w = 300 + t * 500;
-        s.style.fontVariationSettings = `"opsz" 96, "wdth" ${88 + t * 12}, "wght" ${w}`;
-      });
+    spans.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      const d = Math.abs(x - (r.left + r.width / 2));
+      const t = Math.max(0, 1 - d / 420);
+      target.current[i] = 300 + t * 500;
     });
+    schedule();
   }
   function onLeave() {
-    const spans = word.current?.querySelectorAll<HTMLSpanElement>("[data-letter]");
-    spans?.forEach((s) => {
-      s.style.fontVariationSettings = `"opsz" 96, "wdth" 90, "wght" 800`;
-    });
+    target.current = letters.map(() => 800);
+    schedule();
   }
 
   return (
@@ -91,7 +116,7 @@ export function Footer() {
           <span
             key={i}
             data-letter
-            className="font-display-tight inline-block transition-[font-variation-settings] duration-300 ease-out will-change-[font-variation-settings]"
+            className="font-display-tight inline-block"
             style={{ fontVariationSettings: '"opsz" 96, "wdth" 90, "wght" 800' }}
           >
             {ch}
